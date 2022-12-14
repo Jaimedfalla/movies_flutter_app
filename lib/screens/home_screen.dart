@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:movies_flutter_app/providers/movies_provider.dart';
 import 'package:movies_flutter_app/widgets/widgets.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
    
@@ -7,9 +9,13 @@ class HomeScreen extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
+    /* La propiedad listen indica al widget que se redibuje cuando el provider haga el llamaod de NotifyListeners.
+    * Por defecto está en true*/
+    final moviesProvider = Provider.of<MoviesProvider>(context,listen: true);
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Last Movies Play'),
+        title: const Text('Movies Playing'),
         actions: [
           IconButton(
             onPressed: (){},
@@ -18,9 +24,13 @@ class HomeScreen extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Column(
-          children: const [
-            CardSwiper(),
-            MovieSlider()
+          children: [
+            CardSwiper(movies: moviesProvider.movies),
+            MovieSlider(
+              popularMovies: moviesProvider.popularMovies,
+              title: 'Popular Movies',
+              nextPage: () => moviesProvider.getPopularMovies(),
+            )
           ],
         ),
       ),
