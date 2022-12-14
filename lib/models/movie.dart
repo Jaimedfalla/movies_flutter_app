@@ -57,7 +57,7 @@ class Movie {
   );
 
   String _getUrlImage(String? imageName){
-    if ( posterPath != null ) {
+    if ( imageName != null ) {
       return 'https://image.tmdb.org/t/p/w500$imageName';
     }
 
