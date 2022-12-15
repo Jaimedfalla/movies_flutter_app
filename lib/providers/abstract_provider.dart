@@ -1,3 +1,4 @@
 abstract class Searcheable<T>{
-  Future<List<T>> search(String query);
-}
+  void getSuggestonByQuery(String query);
+  Stream<List<T>> get suggestionsStream;
+ }

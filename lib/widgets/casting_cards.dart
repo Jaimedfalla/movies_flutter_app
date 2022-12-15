@@ -17,6 +17,14 @@ class CastingCards extends StatelessWidget {
     return FutureBuilder(
       future: moviesProvider.getMovieCasting(movieId),
       builder: (context, snapshot) {
+        if( !snapshot.hasData ) {
+          return Container(
+            constraints: const BoxConstraints(maxWidth: 150),
+            height: 180,
+            child: const CircularProgressIndicator(),
+          );
+        }
+
         final casting = snapshot.data!;
 
         return Container(
